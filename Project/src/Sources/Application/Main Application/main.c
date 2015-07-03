@@ -77,7 +77,6 @@ void disableWatchdog(void)
  **************************************************************/
 int main(void) 
 {
-
 	initModesAndClock();
 	/* Disable Watchdog */
 	disableWatchdog();
@@ -112,13 +111,20 @@ int main(void)
 			{
 				upPressed();
 			}
-			if(DOWN_PRESS && !UP_PRESS)//button down press detection
+			else if(DOWN_PRESS && !UP_PRESS)//button down press detection
 			{
 				downPressed();
 			}	
+			else
+			{
+				//do nothing
+			}
 		}
-		
-	}
+		else
+		{
+			//do nothing
+		}	
+	}//infinite loop end
 }
 
 

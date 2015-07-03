@@ -203,15 +203,15 @@ void initLeds(void)
 void autoDown(void)
 {
 	T_UBYTE lub_i;
-	lub_i = 11-rub_led;	
-	while(rub_led>=1)
+	lub_i = index_Handler-rub_led;	
+	while(rub_led>=one_Led)
 	{
 		delay_ms(400);
 		SIU.GPDO[lub_i].R = 0;
 		lub_i++;
 		rub_led--;
 	}
-	rub_led = 0;
+	rub_led = min_Led_Number;
 }
 
 /**************************************************************
@@ -224,8 +224,8 @@ void autoDown(void)
 void manualDown(T_UBYTE *lpub_ptr)
 {
 	T_UBYTE lub_i;
-	lub_i = 11;
-	while(DOWN_PRESS && !(*lpub_ptr) && (rub_led>=1))
+	lub_i = index_Handler;
+	while(DOWN_PRESS && !(*lpub_ptr) && (rub_led>=one_Led))
 	{
 		delay_ms(400);
 		if(DOWN_PRESS)
@@ -235,8 +235,8 @@ void manualDown(T_UBYTE *lpub_ptr)
 			*lpub_ptr = 0;	
 		}
 	}
-	if(rub_led<=0)
-		rub_led = 0;
+	if(rub_led<=min_Led_Number)
+		rub_led = min_Led_Number;
 }
 
 /**************************************************************
@@ -249,8 +249,8 @@ void manualDown(T_UBYTE *lpub_ptr)
 void autoUp(void)
 {
 	T_UBYTE lub_i;
-	lub_i = 10-rub_led;	
-	while((rub_led<=10) && !rub_autopinchUp)
+	lub_i = max_Led_Number-rub_led;	
+	while((rub_led<=max_Led_Number) && !rub_autopinchUp)
 	{
 		delay_ms(400);
 		rub_goUp = 0; 
@@ -262,10 +262,14 @@ void autoUp(void)
 			rub_led++;	
 			
 		}
+		else
+		{
+			//do nothing
+		}
 	}
 	if(!rub_autopinchUp)
 	{
-		rub_led = 10;
+		rub_led = max_Led_Number;
 	}	
 	else
 		rub_autopinchUp  = 0;
@@ -281,8 +285,8 @@ void autoUp(void)
 void manualUp(T_UBYTE *lpub_ptr)
 {
 	T_UBYTE lub_i;
-	lub_i = 10;
-	while(UP_PRESS && !(*lpub_ptr) && (rub_led<=10))
+	lub_i = max_Led_Number;
+	while(UP_PRESS && !(*lpub_ptr) && (rub_led<=max_Led_Number))
 	{	
 		delay_ms(400);
 		rub_goUp = 0;
@@ -299,8 +303,8 @@ void manualUp(T_UBYTE *lpub_ptr)
 	}
 	if(!rub_autopinchUp)
 	{
-		if(rub_led>=10)
-			rub_led = 10;	
+		if(rub_led>=max_Led_Number)
+			rub_led = max_Led_Number;	
 	}
 	else 
 		rub_autopinchUp = 0;
@@ -351,6 +355,10 @@ void downPressed(void)
 		}
 		
 	}
+	else
+	{
+		//do nothing
+	}
 	LED_G_OFF;
 }
 
@@ -397,6 +405,10 @@ void upPressed(void)
 			manualUp(&lub_automode);
 		}
 	}
+	else
+	{
+		//do nothing
+	}
 	LED_B_OFF;
 }
 
@@ -437,5 +449,9 @@ void pinchInterruption(void)
 			LED_G_OFF;
 		}
 		
+	}
+	else
+	{
+		//do nothing
 	}    
 }

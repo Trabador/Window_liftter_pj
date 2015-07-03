@@ -70,6 +70,10 @@ extern T_UBYTE rub_goUp;
 #define		min_valid_value 9
 #define 	five_hundred_ms 500
 #define 	exit_condition 	510
+#define 	max_Led_Number		10
+#define 	index_Handler				11
+#define 	min_Led_Number 		0
+#define 	one_Led		1
 #define 	UP_PRESS SIU.GPDI[up].R == 0
 #define 	DOWN_PRESS SIU.GPDI[down].R == 0
 #define 	PINCH_PRESS SIU.GPDI[pinch].R == 0
