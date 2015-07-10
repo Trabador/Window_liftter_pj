@@ -206,7 +206,7 @@ void autoDown(void)
 	lub_i = index_Handler-rub_led;	
 	while(rub_led>=one_Led)
 	{
-		delay_ms(400);
+		delay_ms(TRANSITION_STATE);
 		SIU.GPDO[lub_i].R = 0;
 		lub_i++;
 		rub_led--;
@@ -227,7 +227,7 @@ void manualDown(T_UBYTE *lpub_ptr)
 	lub_i = index_Handler;
 	while(DOWN_PRESS && !(*lpub_ptr) && (rub_led>=one_Led))
 	{
-		delay_ms(400);
+		delay_ms(TRANSITION_STATE);
 		if(DOWN_PRESS)
 		{
 			SIU.GPDO[lub_i-rub_led].R = 0;
@@ -252,7 +252,7 @@ void autoUp(void)
 	lub_i = max_Led_Number-rub_led;	
 	while((rub_led<=max_Led_Number) && !rub_autopinchUp)
 	{
-		delay_ms(400);
+		delay_ms(TRANSITION_STATE);
 		rub_goUp = 0; 
 		if(!rub_autopinchUp)
 		{
@@ -288,7 +288,7 @@ void manualUp(T_UBYTE *lpub_ptr)
 	lub_i = max_Led_Number;
 	while(UP_PRESS && !(*lpub_ptr) && (rub_led<=max_Led_Number))
 	{	
-		delay_ms(400);
+		delay_ms(TRANSITION_STATE);
 		rub_goUp = 0;
 		if(!rub_autopinchUp)
 		{

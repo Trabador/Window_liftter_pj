@@ -77,7 +77,7 @@ extern T_UBYTE rub_goUp;
 #define 	UP_PRESS SIU.GPDI[up].R == 0
 #define 	DOWN_PRESS SIU.GPDI[down].R == 0
 #define 	PINCH_PRESS SIU.GPDI[pinch].R == 0
-
+#define		TRANSITION_STATE 400
 
 /*-- Function Prototypes -----------------------------------------------------*/
 
